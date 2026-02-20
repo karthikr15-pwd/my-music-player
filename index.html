@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>My Simple Music Player</h1>
+<input type="file" id="upload" accept="audio/mp3">
+<audio id="player" controls></audio>
+<br>
+<script>
+  // A tiny bit of JavaScript to make it work!
+  const upload = document.getElementById('upload');
+  const player = document.getElementById('player');
+
+  upload.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    const url = URL.createObjectURL(file);
+    player.src = url;
+  });
+</script>
+</body>
+</html>
