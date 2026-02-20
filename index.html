@@ -11,15 +11,24 @@
 <audio id="player" controls></audio>
 <br>
 <script>
-  // A tiny bit of JavaScript to make it work!
-  const upload = document.getElementById('upload');
-  const player = document.getElementById('player');
+const uploadInput = document.getElementById('upload');
 
-  upload.addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    const url = URL.createObjectURL(file);
-    player.src = url;
+uploadInput.addEventListener('change', async (event) => {
+  const file = event.target.files[0];
+  
+  // This sends the file to your "api/upload.js" file on the server
+  const response = await fetch(`/api/upload?filename=${file.name}`, {
+    method: 'POST',
+    body: file,
   });
+
+  const newSong = await response.json();
+  alert("Song Saved! URL is: " + newSong.url);
+  
+  // Refresh the page to see the new list
+  location.reload(); 
+});
 </script>
 </body>
+
 </html>
